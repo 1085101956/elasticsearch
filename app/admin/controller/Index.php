@@ -5,6 +5,7 @@ use app\BaseController;
 use app\Request;
 use Elasticsearch\ClientBuilder;
 
+
 class Index extends BaseController {
 
     public function index (Request $request) {
@@ -19,6 +20,6 @@ class Index extends BaseController {
         $data = [
             'es_info' => $response,
         ];
-        echo json($data);
+        var_dump($data);
     }
 }
