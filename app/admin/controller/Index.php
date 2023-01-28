@@ -14,7 +14,15 @@ class Index extends BaseController {
             ->build();
         $response = $client->info();
         // 响应格式化
-        var_dump( $client->indices()->getSettings() );
+        $params = [
+            'index' => 'myblog',
+            'client' => [
+                'ignore' => 404
+            ]
+        ];
+
+        $list = $client->indices()->getSettings($params);
+        var_dump( $list );
 
     }
 }
