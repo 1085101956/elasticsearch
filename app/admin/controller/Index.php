@@ -13,13 +13,8 @@ class Index extends BaseController {
             ->setHosts(['localhost:9200'])
             ->build();
         $response = $client->info();
-        //响应格式化
         // 响应格式化
-        //$info = $response->asArray();
+        var_dump( $client->indices()->getSettings() );
 
-        $data = [
-            'es_info' => $response,
-        ];
-        var_dump($data);
     }
 }
