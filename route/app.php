@@ -18,6 +18,7 @@ Route::get('hello/:name', 'index/hello');
 Route::get('niha','index/niha');
 
 
+
 //链接并绑定socket
 Route::get('api/testSocket','index/testSocket');
 //个人发送消息
