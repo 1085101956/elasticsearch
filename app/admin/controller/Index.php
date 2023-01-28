@@ -14,10 +14,10 @@ class Index extends BaseController {
         $response = $client->info();
         //响应格式化
         // 响应格式化
-        $info = $response->asArray();
+        //$info = $response->asArray();
 
         $data = [
-            'es_info' => $info,
+            'es_info' => $response,
         ];
         echo json($data);
     }
