@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use app\BaseController;
 use app\Request;
 use Elasticsearch\ClientBuilder;
+use think\facade\Db;
 
 
 class Index extends BaseController {
@@ -24,5 +25,10 @@ class Index extends BaseController {
         $list = $client->indices()->getSettings($params);
         var_dump( $list );
 
+
+    }
+    public function createIndex ( ) {
+        $list = Db::name('demands_cate')->field('id,name,cover')->select();
+        var_dump($list);
     }
 }

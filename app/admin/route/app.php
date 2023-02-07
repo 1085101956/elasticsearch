@@ -14,6 +14,9 @@ use think\facade\Route;
 Route::get('niha','index/niha');
 
 Route::get("api/seach","index/index");
+Route::get("api/create_index","index/createIndex");
+
+
 
 
 //链接并绑定socket
