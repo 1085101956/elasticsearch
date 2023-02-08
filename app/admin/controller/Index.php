@@ -27,7 +27,8 @@ class Index extends BaseController {
 
 
     }
-    public function createIndex ( ) {
+    public function createIndex () {
+        echo 4554;
         $list = Db::name('demands_cate')->field('id,name,cover')->select();
         var_dump($list);
     }
