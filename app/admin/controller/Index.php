@@ -32,4 +32,7 @@ class Index extends BaseController {
         $list = Db::name('demands_cate')->field('id,name,cover')->select();
         var_dump($list);
     }
+    public function test() {
+        phpinfo();
+    }
 }

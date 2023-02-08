@@ -15,7 +15,7 @@ Route::get('niha','index/niha');
 
 Route::get("api/seach","index/index");
 Route::get("api/create_index","index/createIndex");
-
+Route::get("api/test","index/test");
 
 
 
