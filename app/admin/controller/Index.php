@@ -16,7 +16,7 @@ class Index extends BaseController {
         $response = $client->info();
         // 响应格式化
         $params = [
-            'index' => 'myblog',
+            'index' => 'blog',
             'client' => [
                 'ignore' => 404
             ]
