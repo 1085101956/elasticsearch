@@ -24,8 +24,35 @@ class Index extends BaseController {
 
         $list = $client->indices()->getSettings($params);
         var_dump( $list );
-
-
+    }
+    public function addMapping() {
+        $params = [
+            'index' => 'blog',//索引 （相当于mysql的数据库）
+            'body'  => [
+                'mappings' => [
+                    'base_article' => [ //类型名（相当于mysql的表）
+                        '_all'=>[   //  是否开启所有字段的检索
+                            'enabled' => 'false'
+                        ],
+                        'properties' => [ //文档类型设置（相当于mysql的数据类型）
+                            'id'    => [
+                                'type' => 'integer' // 字段类型为整型
+                            ],
+                            'first_letter' => [
+                                'type' => 'keyword'
+                            ],
+                            'name'  => [
+                                'type'  => 'keyword',
+                            ],
+                            'create_at' => [
+                                'type'  => 'keyword'
+                            ],
+                            ''
+                        ]
+                    ]
+                ]
+            ]
+        ];
     }
     public function createIndex () {
         echo 4554;
