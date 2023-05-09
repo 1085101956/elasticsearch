@@ -16,7 +16,8 @@ Route::get('niha','index/niha');
 Route::get("api/seach","index/index");
 Route::get("api/create_index","index/createIndex");
 Route::get("api/test","index/test");
-
+Route::get("api/get_index","index/getIndex");
+Route::get("api/add_index","index/addIndex");
 
 
 //链接并绑定socket

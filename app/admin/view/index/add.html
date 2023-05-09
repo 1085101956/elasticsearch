@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/cloudcallcenter/web-workbench-sdk/2.10.0/main.min.css">
+    <!--sdk js文件-->
+    <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter/SIPml/0.6.1/SIPml-api.js"></script>
+    <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter-voip/web-agentbar-sdk/1.14.2/index.js"></script>
+    <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter/web-workbench-sdk/2.10.0/workbenchSdk.min.js"></script>
+</head>
+<body>
+<div id="workbench-container"></div>
+<script type="text/javascript">
+    window.onload = function () {
+
+        // window.workbench = new WorkbenchSdk(config)
+        window.workbench = new window.WorkbenchSdk({
+            accessKeyId: 'LTAI5tLm35erakDp7mrC6Hki',//LTAI5tQ8mtZWoX1SZZM7fUyn
+            accessKeySecret: 'H72dWR7SrCvswGIpmIsIFGWPcKqRC8',//TnLGp5OmkrGFZWnsQff9kH8BZmbRNO
+            regionId: 'cn-shanghai',
+            defaultVisible: true,//默认是否展示面板，默认为true，参数类型：Boolean；
+            defaultMainContentVisible: true,//默认是否展开软电话面板，默认为true，参数类型：Boolean；
+            offlineImage: "",//下线展示的静态图片地址，参数类型：String；
+            breakImage: "",//小休展示的静态图片地址，参数类型：String；
+            isLoggedKeepBreak: true,//是否在登录时保持小休状态（不想在业务繁忙时上线立即接电话可设置为true）目前是登录时从小休默认自动变为空闲状态
+            isOutboundNotReceivedToBeProcessed: "",//是否在外呼时未接听也流转到话后处理（当前是未接通后到话后处理状态，再立即到空闲状态）
+            withCredentials: false,//表示跨域请求时是否需要使用凭证,是否允许携带cookie,参数类型：Boolean
+            ajaxApiParamName: "action",//ajaxType为param时指定区分action的名称，默认action，参数类型：String；
+            ajaxOtherParams: {},//其他自定义参数和request同一层级，参数类型：Object；
+            ajaxHeaders: {},//请求的header，参数类型：Object；
+            RPCEndPoint: "https://ccc.cn-shanghai.aliyuncs.com",//云呼叫中心的endpoint地址，目前是"https://ccc.cn-shanghai.aliyuncs.com"；
+            dom: "workbench-container",
+            apiVersion: "aliyunrpc",
+            width: "320px",
+            height: "552px",
+            instanceId: "demo-1551701848918487",
+            ajaxOrigin: "location.origin",//请求源，默认请求当前源（location.origin），参数类型：String；
+            ajaxPath: "/aliyun/ccc/api",
+            ajaxMethod: "post",
+            afterCallRule: 15, // 挂机后的话后处理时间
+            header: true,
+            autoAnswerCall: 8, // 有来电振铃响8s后自动接听
+            exportErrorOfApi: true,
+            onInit: function () {
+                console.log('ddddddd')
+
+                // window.workbench.register() // 想实现自动上线在此注册
+            },
+            onErrorNotify: function (error) {
+                console.log('ddddddd')
+                console.warn(error)
+            },
+            onCallComing: function (callDetail) {
+                console.log('ddddddd')
+
+                console.log(callDetail);
+            },
+            onCallDialing: function (callDetail) {
+                console.log('ddddddd')
+
+                console.log(callDetail);
+            },
+            onStatusChange: function (codeDetail) {
+                console.log(codeDetail);
+            },
+            onCallEstablish: function (callDetail) {
+                console.log("这里是通话建立时触发的回调函数", callDetail)
+            },
+            onCallRelease: function (callDetail) {
+                console.log("这里是通话结束时触发的回调函数", callDetail)
+            },
+            onHangUp: function (type) {
+                console.log("这里是onHangUp事件，type =" + type)
+            },
+            // call:function (callee, caller, callback, otherParams) {
+            //     console.log("这里是onHangUp事件，type =" + callee)
+            // }
+        })
+        window.workbench.call('18225120509', '6690228519628306', callcallback(function () {
+
+        }), {TimeoutSeconds: 15, Tags: "45465", MaskedCallee: "6690228519628306"});//拨打电话
+        window.workbench.hangUp();//挂断电话
+    }
+</script>
+
+</body>
+</html>
