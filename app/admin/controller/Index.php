@@ -7,9 +7,11 @@ use AlibabaCloud\SDK\CCC\V20200701\Models\ListPrivilegesOfUserRequest;
 use AlibabaCloud\Tea\Exception\TeaError;
 use AlibabaCloud\Tea\Utils\Utils;
 use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+use app\admin\service\Sample;
 use app\BaseController;
 use app\Request;
 use Elasticsearch\ClientBuilder;
+use think\Collection;
 use think\Exception;
 use think\facade\Db;
 use think\facade\View;
@@ -111,47 +113,13 @@ class Index extends BaseController {
         return $result;
     }
 
-    /**
-     * 使用AK&SK初始化账号Client
-     * @param string $accessKeyId
-     * @param string $accessKeySecret
-     * @return CCC Client
-     */
-    public static function createClient($accessKeyId, $accessKeySecret){
-        $config = new Config([
-            // 必填，您的 AccessKey ID
-            "accessKeyId" => $accessKeyId,
-            // 必填，您的 AccessKey Secret
-            "accessKeySecret" => $accessKeySecret
-        ]);
-        // 访问的域名
-        $config->endpoint = "ccc.cn-shanghai.aliyuncs.com";
-        return new CCC($config);
-    }
+    public function getyddssd() {
+        $list = Sample::getContactFlowList(1,20,'demo-1551701848918487');
+        if ( empty($list['message'])) {
 
-    /**
-     * @param string[] $args
-     * @return void
-     */
-    public function main($args){
-        // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/311677.html
-        $client = self::createClient("accessKeyId", "accessKeySecret");
-        $listPrivilegesOfUserRequest = new ListPrivilegesOfUserRequest([]);
-        $runtime = new RuntimeOptions([]);
-
-        try {
-            // 复制代码运行请自行打印 API 的返回值
-            $client->listPrivilegesOfUserWithOptions($listPrivilegesOfUserRequest, $runtime);
         }
-        catch (Exception $error) {
-
-            if (!($error instanceof TeaError)) {
-                $error = new TeaError([], $error->getMessage(), $error->getCode(), $error);
-            }
-
-            // 如有需要，请打印 error
-            Utils::assertAsString($error->message);
-        }
+        var_dump($list);exit();
+        return json_encode($list);
     }
 
     public function getIndex()

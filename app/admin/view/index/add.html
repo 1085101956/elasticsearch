@@ -4,20 +4,41 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="//g.alicdn.com/cloudcallcenter/web-workbench-sdk/2.10.0/main.min.css">
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/cloudcallcenter/acc-ivr/1.9.2/main.min.css">
+
     <!--sdk js文件-->
     <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter/SIPml/0.6.1/SIPml-api.js"></script>
     <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter-voip/web-agentbar-sdk/1.14.2/index.js"></script>
     <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter/web-workbench-sdk/2.10.0/workbenchSdk.min.js"></script>
+
+    <!--sdk js文件-->
+    <script type="text/javascript" src="//g.alicdn.com/cloudcallcenter/acc-ivr/1.9.2/accIvrSdk.min.js"></script>
+
 </head>
 <body>
-<div id="workbench-container"></div>
+<div id="workbench-container">坐席</div>
 <script type="text/javascript">
     window.onload = function () {
-
+        // window.customIvr = new window.AccIvrSdk({
+        //     accessKeyId: 'LTAI5tLm35erakDp7mrC6Hki',//LTAI5tQ8mtZWoX1SZZM7fUyn
+        //     accessKeySecret: 'H72dWR7SrCvswGIpmIsIFGWPcKqRC8',//TnLGp5OmkrGFZWnsQff9kH8BZmbRNO
+        //     dom: 'ivr',
+        //     instanceId: 'demo-1551701848918487',
+        //     regionId: 'cn-shanghai',
+        //     ajaxPath: '/aliyun/ccc/api',
+        //     ajaxMethod: 'post',
+        //     useOpenApiSdk: false,
+        //     width: '800px',
+        //     height: '500px',
+        //     baseURL: '/ivr',
+        //     onChangeRouter(url) {
+        //         console.log(url);
+        //     },
+        // });
         // window.workbench = new WorkbenchSdk(config)
         window.workbench = new window.WorkbenchSdk({
-            accessKeyId: '',//LTAI5tQ8mtZWoX1SZZM7fUyn
-            accessKeySecret: '',//TnLGp5OmkrGFZWnsQff9kH8BZmbRNO
+            accessKeyId: '',//
+            accessKeySecret: '',//
             regionId: 'cn-shanghai',
             defaultVisible: true,//默认是否展示面板，默认为true，参数类型：Boolean；
             defaultMainContentVisible: true,//默认是否展开软电话面板，默认为true，参数类型：Boolean；
@@ -34,7 +55,7 @@
             apiVersion: "aliyunrpc",
             width: "320px",
             height: "552px",
-            instanceId: "",
+            instanceId: "demo-1551701848918487",
             ajaxOrigin: "location.origin",//请求源，默认请求当前源（location.origin），参数类型：String；
             ajaxPath: "/aliyun/ccc/api",
             ajaxMethod: "post",
@@ -42,6 +63,13 @@
             header: true,
             autoAnswerCall: 8, // 有来电振铃响8s后自动接听
             exportErrorOfApi: true,
+            moreActionList:["online", "ready", "onlyCall", "break", "offline", "adjustVolume", "changeWorkMode"],
+            sideNavList:["呼入", "呼出", "内部通话", "通话记录", "转接", "会议", "监听", "我的工作", "设备检测", "设置"],
+            //支持面板左侧导航显示自定义，默认是显示全部，配置以后显示自定义的导航，
+            //配置项：["呼入", "呼出", "内部通话", "通话记录", "转接", "会议", "监听", "我的工作", "设备检测", "设置"]。
+            disableSaveStats:false,
+            reducePanel:false,
+            isEnableSwitchAdapter:false,
             onInit: function () {
                 console.log('ddddddd')
 
@@ -73,14 +101,18 @@
             onHangUp: function (type) {
                 console.log("这里是onHangUp事件，type =" + type)
             },
+
+
             // call:function (callee, caller, callback, otherParams) {
             //     console.log("这里是onHangUp事件，type =" + callee)
             // }
         })
-        window.workbench.call('', '', callcallback(function () {
+        // window.workbench.call('18225120509', '6690228519628306', callcallback(function () {
+        //
+        // }), {TimeoutSeconds: 15, Tags: "45465", MaskedCallee: "6690228519628306"});//拨打电话
 
-        }), {TimeoutSeconds: 15, Tags: "45465", MaskedCallee: ""});//拨打电话
-        window.workbench.hangUp();//挂断电话
+
+
     }
 </script>
 

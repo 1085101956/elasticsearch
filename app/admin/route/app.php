@@ -19,6 +19,8 @@ Route::get("api/test","index/test");
 Route::get("api/get_index","index/getIndex");
 Route::get("api/add_index","index/addIndex");
 
+Route::get("api/getyddssd","index/getyddssd");
+
 
 //链接并绑定socket
 Route::get('api/testSocket','index/testSocket');
