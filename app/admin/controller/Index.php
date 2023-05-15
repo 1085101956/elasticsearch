@@ -115,13 +115,32 @@ class Index extends BaseController {
 
     public function getyddssd() {
         $list = Sample::getContactFlowList(1,20,'demo-1551701848918487');
-        if ( empty($list['message'])) {
-
+        if ( empty($list['message']) ) {
+            $this->success('成功',$list);
         }
-        var_dump($list);exit();
-        return json_encode($list);
+        $this->error('失败',$list);
     }
-
+    public function test_xx() {
+        $list = Sample::getExampleList(1,20);
+        if ( empty($list['message']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function test_x() {
+        $list = Sample::GetInstanceDetails('demo-1551701848918487');
+        if ( empty($list['message']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function test_xxx() {
+        $list = Sample::ListInstancesOfUser(1,20);
+        if ( empty($list['message']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
     public function getIndex()
     {
         return View::fetch('index');
