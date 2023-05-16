@@ -136,7 +136,56 @@ class Index extends BaseController {
     }
     public function test_xxx() {
         $list = Sample::ListInstancesOfUser(1,20);
-        if ( empty($list['message']) ) {
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ModifyInstance() {
+        $list = Sample::ModifyInstance('demo-1551701848918487','修改内容');
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function AddPersonalNumbersToUser() {
+        $list = Sample::AddPersonalNumbersToUser('demo-1551701848918487','likenong520@126.com@demo-1551701848918487',"['18225120509']");
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ListUsersOAuth() {
+        $list = Sample::ListUsersOAuth('demo-1551701848918487',1,20);
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ListOutboundNumbersOfUser() {
+        $list = Sample::ListOutboundNumbersOfUser('demo-1551701848918487','likenong520@126.com@demo-1551701848918487',1,20);
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ListPhoneNumbers () {
+        $list = Sample::ListPhoneNumbers('demo-1551701848918487',1,20);
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ListRoles() {
+        $list = Sample::ListRoles('demo-1551701848918487');
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function CreateUser() {
+        $list = Sample::CreateUser('demo-1551701848918487','agent','坐席小王','18225120509','username@example.com','ON_SITE','Agent@demo-1551701848918487');
+        if ( empty($list['message']) && !isset($list['code']) ) {
             $this->success('成功',$list);
         }
         $this->error('失败',$list);

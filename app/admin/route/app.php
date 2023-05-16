@@ -23,6 +23,15 @@ Route::get("api/getyddssd","index/getyddssd");
 Route::get("api/test_xx","index/test_xx");
 Route::get("api/test_x","index/test_x");
 Route::get("api/test_xxx","index/test_xxx");
+Route::get("api/ModifyInstance","index/ModifyInstance");//修改实力
+Route::get("api/AddPersonalNumbersToUser","index/AddPersonalNumbersToUser");//修改实力
+Route::get("api/ListUsersOAuth","index/ListUsersOAuth");//修改实力
+Route::get("api/ListOutboundNumbersOfUser","index/ListOutboundNumbersOfUser");//修改实力
+Route::get("api/ListPhoneNumbers","index/ListPhoneNumbers");//修改实力
+Route::get("api/ListRoles","index/ListRoles");//修改实力
+Route::get("api/CreateUser","index/CreateUser");//修改实力
+
+
 
 
 //链接并绑定socket
