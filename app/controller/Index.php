@@ -17,6 +17,7 @@ class Index extends BaseController
         return 'hello,' . $name;
 
     }
+
     public function niha() {
         return '5dadsadsa';
     }
