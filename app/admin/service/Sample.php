@@ -4,6 +4,8 @@ namespace app\admin\service;
 use AlibabaCloud\SDK\CCC\V20200701\Models\AddPersonalNumbersToUserRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\CreateUserRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\GetInstanceRequest;
+use AlibabaCloud\SDK\CCC\V20200701\Models\GetUserRequest;
+use AlibabaCloud\SDK\CCC\V20200701\Models\ListDevicesRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListInstancesOfUserRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListInstancesRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListOutboundNumbersOfUserRequest;
@@ -11,6 +13,7 @@ use AlibabaCloud\SDK\CCC\V20200701\Models\ListPhoneNumbersRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListRolesRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListUsersRequest;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ModifyInstanceRequest;
+use AlibabaCloud\SDK\CCC\V20200701\Models\StartPredictiveCallRequest;
 use Darabonba\OpenApi\Models\Config;
 use AlibabaCloud\SDK\CCC\V20200701\CCC;
 use AlibabaCloud\SDK\CCC\V20200701\Models\ListContactFlowsRequest;
@@ -394,6 +397,18 @@ class Sample extends Service
 
         }
     }
+
+    /**
+     * @param $InstanceId
+     * @param $LoginName
+     * @param $DisplayName
+     * @param $Mobile
+     * @param $Email
+     * @param $WorkMode
+     * @param $RoleId
+     * @return array
+     * 创建坐席
+     */
     public static function CreateUser($InstanceId,$LoginName,$DisplayName,$Mobile,$Email,$WorkMode,$RoleId){
         $client = self::createClient();
         $createUserRequest = new CreateUserRequest([
@@ -424,6 +439,111 @@ class Sample extends Service
             Utils::assertAsString($error->message);
             return ['code' => 0,'info' => $error->getMessage()];
 
+        }
+    }
+
+    /**
+     * @param $InstanceId
+     * @param $UserId
+     * @return array
+     * 创建坐席
+     */
+    public static function GetUser($InstanceId,$UserId){
+        $client = self::createClient();
+        $getUserRequest = new GetUserRequest([
+            "instanceId" => $InstanceId,
+            "userId" => $UserId
+        ]);
+        $runtime = new RuntimeOptions([]);
+        try {
+            // 复制代码运行请自行打印 API 的返回值
+            $list = $client->getUserWithOptions($getUserRequest, $runtime);
+            $all = $list->body;
+            if ( $all->code == 'OK') {
+                return ['list' => $all->data];
+            } else {
+                return ['code' => 0,'info' => $all->message,'data' => []];
+            }
+        }
+        catch (\Exception $error) {
+            if (!($error instanceof TeaError)) {
+                $error = new TeaError([], $error->getMessage(), $error->getCode(), $error);
+            }
+            // 如有需要，请打印 error
+            Utils::assertAsString($error->message);
+            return ['code' => 0,'info' => $error->getMessage()];
+        }
+    }
+
+    /**
+     * @param $InstanceId
+     * @param $UserId
+     * @return array
+     * 获取指定实例下指定坐席的设备列表
+     */
+    public static function ListDevices($InstanceId,$UserId){
+        // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/311677.html
+        $client = self::createClient("accessKeyId", "accessKeySecret");
+        $listDevicesRequest = new ListDevicesRequest([
+            "instanceId" => $InstanceId,
+            "userId" => $UserId
+        ]);
+        $runtime = new RuntimeOptions([]);
+        try {
+            // 复制代码运行请自行打印 API 的返回值
+            $list = $client->listDevicesWithOptions($listDevicesRequest, $runtime);
+            $all = $list->body;
+            if ( $all->code == 'OK') {
+                return ['list' => $all->data];
+            } else {
+                return ['code' => 0,'info' => $all->message,'data' => []];
+            }
+        }
+        catch (\Exception $error) {
+            if (!($error instanceof TeaError)) {
+                $error = new TeaError([], $error->getMessage(), $error->getCode(), $error);
+            }
+            // 如有需要，请打印 error
+            Utils::assertAsString($error->message);
+            return ['code' => 0,'info' => $error->getMessage()];
+        }
+    }
+
+    /**
+     * @param $InstanceId
+     * @param $Caller
+     * @param $Callee
+     * @param $ContactFlowId
+     * @return array
+     * 发起预测式外呼
+     */
+    public static function StartPredictiveCall($InstanceId,$Caller,$Callee,$ContactFlowId){
+        // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/311677.html
+        $client = self::createClient();
+        $startPredictiveCallRequest = new StartPredictiveCallRequest([
+            "instanceId" => $InstanceId,
+            "caller" => $Caller,
+            "callee" => $Callee,
+            "contactFlowId" => $ContactFlowId
+        ]);
+        $runtime = new RuntimeOptions([]);
+        try {
+            // 复制代码运行请自行打印 API 的返回值
+            $list = $client->startPredictiveCallWithOptions($startPredictiveCallRequest, $runtime);
+            $all = $list->body;
+            if ( $all->code == 'OK') {
+                return ['list' => $all->data];
+            } else {
+                return ['code' => 0,'info' => $all->message,'data' => []];
+            }
+        }
+        catch (\Exception $error) {
+            if (!($error instanceof TeaError)) {
+                $error = new TeaError([], $error->getMessage(), $error->getCode(), $error);
+            }
+            // 如有需要，请打印 error
+            Utils::assertAsString($error->message);
+            return ['code' => 0,'info' => $error->getMessage()];
         }
     }
 }
