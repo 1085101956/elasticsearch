@@ -16,7 +16,6 @@ class Index extends BaseController
     {
         echo 566;
         return 'hello,' . $name;
-
     }
 
     public function niha() {
