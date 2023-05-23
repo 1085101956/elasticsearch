@@ -31,7 +31,8 @@ Route::get("api/ListPhoneNumbers","index/ListPhoneNumbers");//修改实力
 Route::get("api/ListRoles","index/ListRoles");//修改实力
 Route::get("api/CreateUser","index/CreateUser");//修改实力
 
-
+Route::get('api/processPOSTRequest',"test/processPOSTRequest");//
+Route::get('api/processPOSTRequests',"test/processPOSTRequests");//
 
 
 //链接并绑定socket
