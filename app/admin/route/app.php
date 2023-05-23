@@ -34,7 +34,8 @@ Route::get("api/GetUser","index/GetUser");//修改实力
 Route::get("api/ListDevices","index/ListDevices");//修改实力
 Route::get("api/StartPredictiveCall","index/StartPredictiveCall");//修改实力
 
-
+Route::get('api/processPOSTRequest',"test/processPOSTRequest");//
+Route::get('api/processPOSTRequests',"test/processPOSTRequests");//
 
 
 //链接并绑定socket
