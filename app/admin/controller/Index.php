@@ -190,6 +190,28 @@ class Index extends BaseController {
         }
         $this->error('失败',$list);
     }
+    public function GetUser() {
+        $list = Sample::GetUser('demo-1551701848918487','likenong520@126.com@demo-1551701848918487');
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function ListDevices() {
+        $list = Sample::ListDevices('demo-1551701848918487','likenong520@126.com@demo-1551701848918487');
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+    }
+    public function StartPredictiveCall() {
+        $list = Sample::StartPredictiveCall('demo-1551701848918487','6690228519628306','19936016718','cea968b5-e8a6-45ac-b17c-1049dc77d67b');
+        if ( empty($list['message']) && !isset($list['code']) ) {
+            $this->success('成功',$list);
+        }
+        $this->error('失败',$list);
+
+    }
     public function getIndex()
     {
         return View::fetch('index');
