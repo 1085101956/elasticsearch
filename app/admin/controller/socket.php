@@ -950,61 +950,61 @@ class WebSocketClient {
 
                 // 4字节掩码
 
-       $maskChars = $this->fetchStrFromReadBuf(4);
+    $maskChars = $this->fetchStrFromReadBuf(4);
 
-                $maskSet = [ord($maskChars[0]), ord($maskChars[1]), ord($maskChars[2]), ord($maskChars[3])];
+    $maskSet = [ord($maskChars[0]), ord($maskChars[1]), ord($maskChars[2]), ord($maskChars[3])];
 
-                $data = $this->fetchStrFromReadBuf($dataLen);
+    $data = $this->fetchStrFromReadBuf($dataLen);
 
-                for ($i = 0; $i < $dataLen; $i++) {
+    for ($i = 0; $i < $dataLen; $i++) {
 
-                                    $data[$i] = chr(ord($data[$i]) ^ $maskSet[$i % 4]);
+                     $data[$i] = chr(ord($data[$i]) ^ $maskSet[$i % 4]);
 
-                }
+    }
 
-            } else {
+   } else {
 
-                            $data = $this->fetchStrFromReadBuf($dataLen);
+                $data = $this->fetchStrFromReadBuf($dataLen);
 
-            }
+   }
 
-            if ($opcode == self::OPCODE_CLOSE) {
+   if ($opcode == self::OPCODE_CLOSE) {
 
-                            $status = (ord($data[0]) << 8) + ord($data[1]);
+                $status = (ord($data[0]) << 8) + ord($data[1]);
 
-                $data = substr($data, 2);
+    $data = substr($data, 2);
 
-            }
+   }
 
-        }
+  }
 
-        $this->discardReadBuf($this->readBufPos);
+  $this->discardReadBuf($this->readBufPos);
 
-        $dataFrame = new WsDataFrame();
+  $dataFrame = new WsDataFrame();
 
-        $dataFrame->opcode = $opcode;
+  $dataFrame->opcode = $opcode;
 
-        $dataFrame->fin = $fin;
+  $dataFrame->fin = $fin;
 
-        $dataFrame->status = $status;
+  $dataFrame->status = $status;
 
-        $dataFrame->playload = $data;
+  $dataFrame->playload = $data;
 
-        return $dataFrame;
+  return $dataFrame;
 
-    }
+ }
 
-    /**
+ /**
 
-    * __destruct
+ * __destruct
 
-    */
+ */
 
-    public function __destruct() {
+ public function __destruct() {
 
-            $this->abnormalClose();
+      $this->abnormalClose();
 
-    }
+ }
 
 }
 
@@ -1020,41 +1020,36 @@ class WebSocketClient {
 
 class WsDataFrame {
 
-    /**
+ /**
 
-    * @var int $opcode
+ * @var int $opcode
 
-    */
+ */
 
-    public $opcode;
+ public $opcode;
 
-    /**
+ /**
 
-    * @var int $fin 标识数据包是否已结束
+ * @var int $fin 标识数据包是否已结束
 
-    */
+ */
 
-    public $fin;
+ public $fin;
 
-    /**
+ /**
 
-    * @var int $status 关闭时的状态码，如果有的话
+ * @var int $status 关闭时的状态码，如果有的话
 
-    */
+ */
 
-    public $status;
+ public $status;
 
-    /**
+ /**
 
-    * @var string 数据包携带的数据
+ * @var string 数据包携带的数据
 
-    */
+ */
 
-    public $playload;
+ public $playload;
 
 }
-
-作者：sampai
-链接：https://www.jianshu.com/p/800fd4e87520
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
