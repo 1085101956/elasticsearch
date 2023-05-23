@@ -30,6 +30,9 @@ Route::get("api/ListOutboundNumbersOfUser","index/ListOutboundNumbersOfUser");//
 Route::get("api/ListPhoneNumbers","index/ListPhoneNumbers");//修改实力
 Route::get("api/ListRoles","index/ListRoles");//修改实力
 Route::get("api/CreateUser","index/CreateUser");//修改实力
+Route::get("api/GetUser","index/GetUser");//修改实力
+Route::get("api/ListDevices","index/ListDevices");//修改实力
+Route::get("api/StartPredictiveCall","index/StartPredictiveCall");//修改实力
 
 Route::get('api/processPOSTRequest',"test/processPOSTRequest");//
 Route::get('api/processPOSTRequests',"test/processPOSTRequests");//
